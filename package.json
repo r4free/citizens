@@ -26,7 +26,7 @@
     "dependencies": {
         "d3": "^5.15.0",
         "element-ui": "^2.13.0",
-        "highcharts": "^8.0.4",
+        "highcharts": "^8.1.1",
         "highcharts-more": "^0.1.7",
         "highcharts-release": "^6.0.4",
         "venn.js": "^0.2.20",
