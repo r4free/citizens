@@ -9,4 +9,5 @@ class Citizen extends Model
     public function setBussAttribute($value){
         $this->attributes['buss'] = $value ? json_encode($value) : null;
     }
+
 }

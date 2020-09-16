@@ -23,6 +23,10 @@ class CreateCitizensTable extends Migration
             $table->json('buss')->nullable();
             $table->date('birthday');
             $table->date('disease_date')->nullable();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

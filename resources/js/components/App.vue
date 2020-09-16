@@ -6,16 +6,22 @@
                 Filtrar cidadãos:
                 <el-checkbox v-model="filters.man">Homens</el-checkbox>
                 <el-checkbox v-model="filters.woman">Mulheres</el-checkbox>
+                <el-button type="info" @click="generateData">Gerar dados</el-button>
+                <download-excel
+                    class="el-button el-button-download"
+                    :data   = "excelData">
+                    Download excel
+                </download-excel>
             </div>
             <div class="col-12" v-if="citizens.length">
 
                 <CTable :data="citizens" title="Cidadãos de XPTO"></CTable>
                 <CTable
-                        :data="sick" title="Cidadãos que tiveram dengue"
-                        :a="{text:'Cidadãos que tiveram dengue',value:sick.length}"
-                        :b="{text:'cidadãos que não tiveram dengue',value:citizens.length-sick.length}"
-                        :ab="{text:'Todos',value:citizens.length}"
-                        :has-chart="true"
+                    :data="sick" title="Cidadãos que tiveram dengue"
+                    :a="{text:'Cidadãos que tiveram dengue',value:sick.length}"
+                    :b="{text:'cidadãos que não tiveram dengue',value:citizens.length-sick.length}"
+                    :ab="{text:'Todos',value:citizens.length}"
+                    :has-chart="true"
                 ></CTable>
                 <CTable :data="students" title="Cidadãos que estudaram"></CTable>
                 <CTable :data="buss" title="Cidadãos que andam de ônibus"></CTable>
@@ -26,66 +32,66 @@
                 <h1>Exercicios:</h1>
 
                 <CTable
-                        title="1 . Relatório Educação: Informar nome, data de nascimento e id dos cidadãos de XPTO que frequentaram a escola, menos os cidadãos que tiveram dengue."
-                        :data="studentsNotSick"
+                    title="1 . Relatório Educação: Informar nome, data de nascimento e id dos cidadãos de XPTO que frequentaram a escola, menos os cidadãos que tiveram dengue."
+                    :data="studentsNotSick"
                 ></CTable>
 
                 <CTable
-                        title="2 . Relatório Saúde: Informar nome, data de nascimento e data que tiveram dengue dos cidadãos de XPTO que frequentaram o posto de saúde, menos os cidadãos que não utilizam ônibus."
-                        :data="sickNotBuss"
+                    title="2 . Relatório Saúde: Informar nome, data de nascimento e data que tiveram dengue dos cidadãos de XPTO que frequentaram o posto de saúde, menos os cidadãos que não utilizam ônibus."
+                    :data="sickNotBuss"
                 ></CTable>
 
                 <CTable
-                        title="3 . Relatório Mobilidade: Informar nome, data de nascimento e linhas de ônibus dos cidadãos de XPTO que
+                    title="3 . Relatório Mobilidade: Informar nome, data de nascimento e linhas de ônibus dos cidadãos de XPTO que
                         utilizaram o transporte público e não tiveram dengue."
-                        :data="bussNotSick"
-                        :show_studding="false"
-                        :show_gender="false"
-                        :show_father_name="false"
-                        :show_mother_name="false"
-                        :show_disease_date="false"
+                    :data="bussNotSick"
+                    :show_studding="false"
+                    :show_gender="false"
+                    :show_father_name="false"
+                    :show_mother_name="false"
+                    :show_disease_date="false"
                 ></CTable>
 
                 <CTable
-                        title="4 . Relatório Educação e Saúde: Informar nome, data de nascimento, id e data que tiveram dengue dos cidadãos de XPTO que
+                    title="4 . Relatório Educação e Saúde: Informar nome, data de nascimento, id e data que tiveram dengue dos cidadãos de XPTO que
                         frequentaram a escola e tiveram dengue."
-                        :data="sickIsStudentAndSick"
+                    :data="sickIsStudentAndSick"
                 ></CTable>
 
                 <CTable
-                        title="5 . Relatório Educação e Mobilidade: Informar nome, data de nascimento, id e linhas de ônibus dos cidadãos de XPTO que
+                    title="5 . Relatório Educação e Mobilidade: Informar nome, data de nascimento, id e linhas de ônibus dos cidadãos de XPTO que
                         frequentaram a escola e utilizaram transporte público."
-                        :data="studentsUsedBuss"
+                    :data="studentsUsedBuss"
                 ></CTable>
 
                 <CTable
-                        title="6 . Relatório Saúde e Mobilidade: Informar nome, data de nascimento, data que tiveram dengue e linhas de ônibus dos cidadãos de XPTO que
+                    title="6 . Relatório Saúde e Mobilidade: Informar nome, data de nascimento, data que tiveram dengue e linhas de ônibus dos cidadãos de XPTO que
                         frequentaram o posto de saúde e utilizaram transporte público."
-                        :data="sickUsedBuss"
+                    :data="sickUsedBuss"
                 ></CTable>
 
                 <CTable
-                        title="7 . Relatório Saúde, Mobilidade e Educação: Informar nome, data de nascimento, data que tiveram dengue e linhas de ônibus  dos cidadãos de XPTO que
+                    title="7 . Relatório Saúde, Mobilidade e Educação: Informar nome, data de nascimento, data que tiveram dengue e linhas de ônibus  dos cidadãos de XPTO que
                         frequentaram o posto de saúde, utilizaram transporte público e frequentaram a escola."
-                        :data="sickUsedBussAndStudent"
+                    :data="sickUsedBussAndStudent"
                 ></CTable>
 
                 <CTable
-                        title="8 . Informar nome, data de nascimento, data que tiveram dengue dos cidadãos de XPTO que
+                    title="8 . Informar nome, data de nascimento, data que tiveram dengue dos cidadãos de XPTO que
                         frequentaram o posto de saúde, mas não utilizaram transporte público."
-                        :data="sickNotUsedBuss"
+                    :data="sickNotUsedBuss"
                 ></CTable>
 
                 <CTable
-                        title="9 . Informar nome, data de nascimento, data que tiveram dengue dos cidadãos de XPTO que
+                    title="9 . Informar nome, data de nascimento, data que tiveram dengue dos cidadãos de XPTO que
                         frequentaram o posto de saúde, mas não frequentaram a escola."
-                        :data="sickNotStudent"
+                    :data="sickNotStudent"
                 ></CTable>
 
                 <CTable
-                        title="10 . Informar nome, data de nascimento, data que tiveram dengue dos cidadãos de XPTO que
+                    title="10 . Informar nome, data de nascimento, data que tiveram dengue dos cidadãos de XPTO que
                         frequentaram o posto de saúde, mas não frequentaram a escola, nem utilizaram transporte público."
-                        :data="sickNotStudentNotBuss"
+                    :data="sickNotStudentNotBuss"
                 ></CTable>
 
             </div>
@@ -163,13 +169,27 @@
                 }, 2000);
             },
             getCitizens() {
-                return axios.get('/citizen').then(r => {
-                    this.citizen_list = r.data.data;
-                    this.mountGraphic();
-                });
+                return axios.get('/citizen')
+                    .then(r => {
+                        this.citizen_list = r.data.data;
+                        this.mountGraphic();
+                    });
             },
+            generateData() {
+                return axios.get('/citizen/generate')
+                .then(()=>{
+                    this.getCitizens()
+                })
+            }
         },
         computed: {
+            excelData(){
+                const data = [];
+                this.citizens.forEach(c=>{
+                    data.push(c)
+                });
+                return data;
+            },
             citizens() {
 
                 let list = this.citizen_list;
@@ -280,9 +300,9 @@
         watch: {
             filters: {
                 deep: true,
-                handler: function () {
-                    this.mountGraphic()
-                }
+                // handler: function () {
+                //     this.mountGraphic()
+                // }
             }
         }
     }
